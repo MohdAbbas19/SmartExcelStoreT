@@ -486,6 +486,13 @@ footer {
 }
 
 </style>
+  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script type="text/javascript">
+  (function() {
+    emailjs.init("JAZw_pFUaxzTWzkuw"); // Replace with your actual key
+  })();
+</script>
+
 </head>
 
 <body>
@@ -723,12 +730,7 @@ function checkout() {
       console.error(err);
     });
 }
-//feedback
-
- (function(){
-    emailjs.init("JAZw_pFUaxzTWzkuw");
-  })();
-  
+//feedbacz  
 document.getElementById("feedback-form").addEventListener("submit", function (e) {
   e.preventDefault();
 
