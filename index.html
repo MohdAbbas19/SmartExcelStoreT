@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smart Excel Store</title>
   <style>/* style.css */
+/* style.css */
 body {
   font-family: sans-serif;
   background-color: #f9fafb;
@@ -222,6 +223,46 @@ nav a:hover {
 .about p, .contact p {
   color: #374151;
 }
+#about {
+  padding: 60px 20px;
+  background: #f9f9f9;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.about-heading {
+  font-size: 2em;
+  color: #58a251;
+  margin-bottom: 20px;
+}
+
+.about-text {
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: #333;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#read-more-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: none;
+  background: #58a251;
+  color: white;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#read-more-btn:hover {
+  background: #4a8a40;
+}
+
+.hidden {
+  display: none;
+}
+
 .cart-container {
   position: fixed;
   top: 80px;
@@ -288,6 +329,80 @@ nav a:hover {
 .contact a.button:hover {
   background-color: #2c7925;
 }
+.contact-section {
+  padding: 50px 20px;
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.contact-container {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-container h3 {
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.contact-item .icon {
+  width: 24px;
+  height: 24px;
+  fill: #58a251;
+}
+
+.contact-item a {
+  color: #0073e6;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.insta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #58a251;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.insta-button .icon {
+  width: 20px;
+  height: 20px;
+  fill: white;
+}
+
+.insta-button:hover {
+  background-color: #4a8c42;
+}
+
+@media screen and (max-width: 600px) {
+  .contact-item {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .insta-button {
+    width: 100%;
+    padding: 14px 0;
+  }
+}
+
 
 footer {
   background-color: #ffffff;
@@ -313,6 +428,7 @@ footer {
   }
 
 }
+
 </style>
 </head>
 
@@ -347,11 +463,19 @@ footer {
     <a href="#products">Shop Now</a>
   </section>
 
-  <!-- About Section -->
-  <section id="about" class="about">
-    <h3>About Us</h3>
-    <p>We create simple yet powerful Excel tools to help professionals, students, and small business owners automate their work and save time.</p>
-  </section>
+   <!-- About Section -->
+  <section id="about">
+  <div class="about-container">
+    <h2 class="about-heading">About Us</h2>
+    <p class="about-text">
+      At <strong>SmartExcelStore</strong>, we design simple yet powerful Excel templates for professionals, students, and small business owners. 
+      <span id="more-text" class="hidden">
+        Our goal is to save you time, boost productivity, and make data management effortless with tools that work right out of the box.
+      </span>
+    </p>
+    <button id="read-more-btn">Read More</button>
+  </div>
+</section>
 
   <!-- Product Section -->
   <section id="products" class="products">
@@ -395,11 +519,26 @@ footer {
 
 
   <!-- Contact Section -->
-  <section id="contact" class="contact">
+  <section class="contact-section">
+  <div class="contact-container">
     <h3>Get in Touch</h3>
-    <p>Email us at <a href="mailto:mabbas122119sk@gmail.com">mabbas122119sk@gmail.com</a></p>
-    <a href="https://www.instagram.com/smar_tsheet" target="_blank" class="button">Chat Now on Instagram</a>
-  </section>
+
+    <div class="contact-item">
+      <svg class="icon" viewBox="0 0 20 20">
+        <path d="M2.94 5.94A1.5 1.5 0 014.5 5h11a1.5 1.5 0 011.56.94l-7.06 4.41-7.06-4.41z" />
+        <path d="M18 8.17l-7.28 4.54a.75.75 0 01-.77 0L2 8.17V14.5A1.5 1.5 0 003.5 16h13a1.5 1.5 0 001.5-1.5V8.17z" />
+      </svg>
+      <a href="mailto:mabbas122119sk@gmail.com">mabbas122119sk@gmail.com</a>
+    </div>
+
+    <a class="insta-button" href="https://www.instagram.com/smar_tsheet" target="_blank">
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M7.75 2C4.68 2 2 4.68 2 7.75v8.5C2 19.32 4.68 22 7.75 22h8.5C19.32 22 22 19.32 22 16.25v-8.5C22 4.68 19.32 2 16.25 2h-8.5zM12 7.75A4.25 4.25 0 1112 16.25 4.25 4.25 0 0112 7.75zM18.5 6.25a1.25 1.25 0 11-2.5 0 1.25 1.25 0 012.5 0zM12 9a3 3 0 100 6 3 3 0 000-6z" />
+      </svg>
+      Chat on Instagram
+    </a>
+  </div>
+</section>
 
   <!-- Footer -->
   <footer>
@@ -411,6 +550,18 @@ function toggleNav() {
   const navLinks = document.getElementById("nav-links");
   navLinks.classList.toggle("show");
 }
+//about
+document.getElementById("read-more-btn").addEventListener("click", function () {
+  const moreText = document.getElementById("more-text");
+  if (moreText.classList.contains("hidden")) {
+    moreText.classList.remove("hidden");
+    this.textContent = "Read Less";
+  } else {
+    moreText.classList.add("hidden");
+    this.textContent = "Read More";
+  }
+});
+    
 //cart
 let cart = [];
 
