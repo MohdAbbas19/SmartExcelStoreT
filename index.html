@@ -313,7 +313,6 @@ nav a:hover {
   margin-bottom: 8px;
 }
 
-
 #feedback {
   padding: 50px 20px;
   background-color: #f4f4f4;
@@ -583,6 +582,9 @@ footer {
   <textarea name="user_message" placeholder="Your Feedback..." required></textarea>
   <button type="submit">Submit Feedback</button>
 </form>
+    <p id="feedback-message" class="hidden">Thanks for your feedback!</p>
+  </div>
+</section>
 
   <!-- Contact Section -->
   <section class="contact-section">
@@ -594,7 +596,7 @@ footer {
         <path d="M2.94 5.94A1.5 1.5 0 014.5 5h11a1.5 1.5 0 011.56.94l-7.06 4.41-7.06-4.41z" />
         <path d="M18 8.17l-7.28 4.54a.75.75 0 01-.77 0L2 8.17V14.5A1.5 1.5 0 003.5 16h13a1.5 1.5 0 001.5-1.5V8.17z" />
       </svg>
-      <a href="mailto:mabbas122119sk@gmail.com">mabbas122119sk@gmail.com</a>
+      <a href="mailto:smartexcelstore@gmail.com">smartexcelstore@gmail.com</a>
     </div>
 
     <a class="insta-button" href="https://www.instagram.com/smar_tsheet" target="_blank">
@@ -611,11 +613,14 @@ footer {
     <p>&copy; 2025 SmartExcelStore. All rights reserved.</p>
   </footer>
   <script>
+
+
 //nave
 function toggleNav() {
   const navLinks = document.getElementById("nav-links");
   navLinks.classList.toggle("show");
 }
+
 //about
 document.getElementById("read-more-btn").addEventListener("click", function () {
   const moreText = document.getElementById("more-text");
@@ -627,7 +632,8 @@ document.getElementById("read-more-btn").addEventListener("click", function () {
     this.textContent = "Read More";
   }
 });
-    
+
+
 //cart
 let cart = [];
 
@@ -717,7 +723,9 @@ function checkout() {
       console.error(err);
     });
 }
-(function(){
+//feedback
+
+ (function(){
     emailjs.init("JAZw_pFUaxzTWzkuw");
   })();
   
@@ -733,6 +741,11 @@ document.getElementById("feedback-form").addEventListener("submit", function (e)
       console.error(error);
     });
 });
+
+
+
+
+
 
 
 
