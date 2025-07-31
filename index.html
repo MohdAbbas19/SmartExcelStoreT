@@ -514,7 +514,7 @@ footer {
   <ul class="nav-links" id="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#products">Templates</a></li>
-    <li><a href="#contact-section">Contact</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
@@ -618,7 +618,7 @@ footer {
 </section>
 
   <!-- Contact Section -->
-  <section class="contact-section">
+  <section class="contact-section" id="contact">
   <div class="contact-container">
     <h3>Get in Touch</h3>
 
@@ -802,13 +802,6 @@ document.getElementById("feedback-form").addEventListener("submit", function(e) 
       event.preventDefault();
       return false;
     }
-
-    if (form.user_message.value.trim().length < 10) {
-      alert("Feedback should be at least 10 characters long.");
-      event.preventDefault();
-      return false;
-    }
-
     // You can show a loader or message here
     return true;
   }
