@@ -514,7 +514,7 @@ footer {
   <ul class="nav-links" id="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#products">Templates</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact-section">Contact</a></li>
   </ul>
 </nav>
 
@@ -545,7 +545,7 @@ footer {
 
   <!-- Product Section -->
   <section id="products" class="products">
-    <h3>Our Products</h3>
+    <h3>Templates</h3>
     <div class="product-grid">
       <!-- Product Card -->
       <div class="product">
@@ -582,16 +582,39 @@ footer {
     <button onclick="checkout()">Checkout</button>
   </div>
 </div>
+  
 <section id="feedback">
   <div class="feedback-container">
     <h2>We Value Your Feedback</h2>
     <p>Your input helps us improve our Excel tools and templates.</p>
-    <form id="feedback-form">
-  <input type="text" name="user_name" placeholder="Your name" required />
-  <input type="email" name="user_email" placeholder="Your Email" required />
-  <textarea name="user_message" placeholder="Your Feedback..." required></textarea>
-  <button type="submit">Submit Feedback</button>
-</form>
+
+    <form id="feedback-form" onsubmit="return validateForm(event)">
+      <input
+        type="text"
+        name="user_name"
+        placeholder="Your name"
+        required
+        minlength="2"
+        title="Please enter at least 2 characters"
+      />
+      <input
+        type="email"
+        name="user_email"
+        placeholder="Your Gmail address"
+        required
+        pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
+        title="Please enter a valid Gmail address"
+      />
+      <textarea
+        name="user_message"
+        placeholder="Your Feedback..."
+        required
+        minlength="10"
+        title="Feedback should be at least 10 characters"
+      ></textarea>
+      <button type="submit">Submit Feedback</button>
+    </form>
+
     <p id="feedback-message" class="hidden">Thanks for your feedback!</p>
   </div>
 </section>
@@ -747,7 +770,50 @@ document.getElementById("feedback-form").addEventListener("submit", function (e)
     });
 });
 
+document.getElementById("feedback-form").addEventListener("submit", function(e) {
+      e.preventDefault();
 
+      const form = e.target;
+      const formData = new FormData(form);
+
+      fetch("https://script.google.com/macros/s/AKfycbxLlqmmzIR_fndqGRVNcviskPcG3FFETWJhXO437KrhHqLxk7OggXnb8z62hNifheuk/exec", {
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.json())
+      .then(response => {
+        if (response.result === "success") {
+          form.reset();
+        } else {
+          throw new Error("Error in response");
+        }
+      })
+      .catch(err => {
+        alert("Failed to submit feedback.");
+        console.error(err);
+      });
+    });
+  // form validation 
+  function validateForm(event) {
+    const form = document.getElementById("feedback-form");
+    const email = form.user_email.value;
+    const gmailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+    if (!gmailPattern.test(email)) {
+      alert("Please enter a valid Gmail address.");
+      event.preventDefault();
+      return false;
+    }
+
+    if (form.user_message.value.trim().length < 10) {
+      alert("Feedback should be at least 10 characters long.");
+      event.preventDefault();
+      return false;
+    }
+
+    // You can show a loader or message here
+    return true;
+  }
 
 
 
