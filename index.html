@@ -162,9 +162,11 @@ nav a:hover {
 }
 
 .products h3 {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
+   text-align: center;
+  color: #58a251
 }
 
 .product-grid {
@@ -188,6 +190,7 @@ nav a:hover {
 
 .product h4 {
   font-weight: bold;
+  
 }
 
 .product p {
@@ -251,7 +254,7 @@ nav a:hover {
   background: #58a251;
   color: white;
   font-size: 1em;
-  border-radius: 5px;
+  border-radius: 15px;
   cursor: pointer;
 }
 
@@ -312,6 +315,81 @@ nav a:hover {
 #cart-items li {
   margin-bottom: 8px;
 }
+/* Scroll Wrapper: Enables horizontal scroll */
+/* Review Section */
+#reviews {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+/* Heading */
+.review-heading {
+  text-align: center;
+  color: #58a251;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+/* Scroll Wrapper - fixed size */
+.review-scroll-wrapper {
+  width: 90%;
+  max-width: 400px; /* limit size so only one card fits */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.review-scroll-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* Flex container for review cards */
+.review-container {
+  display: flex;
+}
+
+/* Single Review Card */
+.review-card {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  background: #fff;
+  border-left: 6px solid #58a251;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-right: 1rem;
+  box-sizing: border-box;
+}
+
+/* Review text and name */
+.review-text {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.review-author {
+  text-align: right;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+}
+
+
+@media (min-width: 768px) {
+  .review-card {
+    min-width: 350px;
+    max-width: 350px;
+  }
+}
+
+
+
+
 
 #feedback {
   padding: 50px 20px;
@@ -326,7 +404,7 @@ nav a:hover {
 
 #feedback h2 {
   color: #58a251;
-  font-size: 2em;
+  font-size: 1.5rem;
   margin-bottom: 10px;
 }
 
@@ -351,16 +429,14 @@ nav a:hover {
   color: white;
   border: none;
   padding: 12px 20px;
-  border-radius: 5px;
+  border-radius: 15px;
   cursor: pointer;
   font-size: 1em;
+  margin-left: 18px;
 }
 
 #feedback-form button:hover {
   background-color: #4a8a40;
-}
-    form {
-  padding-right: 20px; /* Adjust as needed */
 }
 
 #feedback-message {
@@ -368,6 +444,23 @@ nav a:hover {
   margin-top: 20px;
   font-weight: bold;
 }
+.form-group input,
+.form-group textarea {
+  padding: 12px 16px;
+}
+.form-group {
+  margin-bottom: 20px; /* spacing between each field */
+}
+form {
+  padding-right: 20px; /* Adjust as needed */
+}
+
+.form-group input,
+.form-group textarea {
+  margin-top: 5px;       /* spacing between label and input */
+  margin-bottom: 5px;    /* extra spacing below input */
+}
+
 
 .hidden {
   display: none;
@@ -488,6 +581,7 @@ footer {
 
 }
 
+
 </style>
   <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script type="text/javascript">
@@ -582,6 +676,18 @@ footer {
     <button onclick="checkout()">Checkout</button>
   </div>
 </div>
+
+
+  
+<section id="reviews">
+  <h2 class="review-heading">User Reviews</h2>
+  <div class="review-scroll-wrapper">
+    <div class="review-container" id="reviewContainer">
+      <!-- Dynamic reviews will be inserted here -->
+    </div>
+  </div>
+</section>
+
   
 <section id="feedback">
   <div class="feedback-container">
@@ -805,7 +911,32 @@ document.getElementById("feedback-form").addEventListener("submit", function(e) 
     // You can show a loader or message here
     return true;
   }
+const reviewContainer = document.getElementById("reviewContainer");
 
+  fetch("https://script.google.com/macros/s/AKfycby-yGMXsz2zgXkgOe92jYJlw7ftEDJYxjrOt0yx8fnBs5It-e24GqD98XK3posFG4wn/exec") // Replace with your actual URL
+    .then(response => response.json())
+    .then(data => {
+      if (data.length === 0) {
+        reviewContainer.innerHTML = "<p>No reviews available.</p>";
+        return;
+      }
+
+      data.forEach(review => {
+        const card = document.createElement("div");
+        card.className = "review-card";
+
+        card.innerHTML = `
+          <p class="review-text">"${review.message}"</p>
+          <p class="review-author">– ${review.name}</p>
+        `;
+
+        reviewContainer.appendChild(card);
+      });
+    })
+    .catch(error => {
+      console.error("Error loading reviews:", error);
+      reviewContainer.innerHTML = "<p>Error loading reviews.</p>";
+    });
 
 
 
