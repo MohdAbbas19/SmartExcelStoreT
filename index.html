@@ -1187,6 +1187,43 @@ const reviewContainer = document.getElementById("reviewContainer");
       console.error("Error loading reviews:", error);
       reviewContainer.innerHTML = "<p>Error loading reviews.</p>";
     });
+const toggle = document.getElementById("chatbotToggle");
+  const chatbot = document.getElementById("chatbotContainer");
+  const closeBtn = document.getElementById("chatbotClose");
+  const sendBtn = document.getElementById("chatbotSend");
+  const input = document.getElementById("chatbotInput");
+  const messages = document.getElementById("chatbotMessages");
+
+  toggle.onclick = () => chatbot.style.display = "flex";
+  closeBtn.onclick = () => chatbot.style.display = "none";
+
+  sendBtn.onclick = sendMessage;
+  input.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") sendMessage();
+  });
+
+  function sendMessage() {
+    const userText = input.value.trim();
+    if (!userText) return;
+
+    const userMsg = document.createElement("div");
+    userMsg.textContent = "👤 " + userText;
+    messages.appendChild(userMsg);
+
+    const botMsg = document.createElement("div");
+    botMsg.textContent = "🤖 " + getBotReply(userText);
+    messages.appendChild(botMsg);
+
+    input.value = "";
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function getBotReply(msg) {
+    msg = msg.toLowerCase();
+    if (msg.includes("hello") || msg.includes("hi")) return "Hi there! How can I help you?";
+    if (msg.includes("price") || msg.includes("cost")||msg.includes("money")) return "You can check our pricing in the Excel templates section.";
+    return "I'm just a simple bot! Please contact us for more support.";
+  }
 
 
 
@@ -1197,4 +1234,5 @@ const reviewContainer = document.getElementById("reviewContainer");
 </body>
 
 </html>
+
 
